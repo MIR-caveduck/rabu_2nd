@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>라브 2주년 편지</title>
+<style>
+:root{
+  --bg:#0b0b11;
+  --bg2:#171421;
+  --paper:#fffdfb;
+  --ink:#2a252c;
+  --muted:#8d8390;
+  --violet:#9b8cff;
+  --violet2:#6f5eea;
+  --pink:#ff8dc2;
+  --line:#ece7f4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(155,140,255,.18), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(255,141,194,.11), transparent 24%),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+}
+body:before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+.gate{
+  position:fixed; inset:0; z-index:30;
+  display:grid; place-items:center;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(155,140,255,.18), transparent 28%),
+    linear-gradient(180deg,#15121c,#09090d);
+  transition:.8s ease;
+}
+.gate.open{opacity:0;visibility:hidden}
+.gate-inner{text-align:center;color:#f7f3fb;width:min(92vw,560px)}
+.ghost{font-size:64px;filter:drop-shadow(0 0 18px rgba(155,140,255,.35));margin-bottom:8px}
+.gate h1{font-size:27px;margin:0 0 8px}
+.gate p{margin:0 0 22px;color:#cfc7d6;font-size:14px}
+.open-btn{
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.07);
+  color:#fff;padding:12px 22px;border-radius:999px;
+  cursor:pointer;font-weight:700;transition:.25s ease;
+}
+.open-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.12)}
+
+main{opacity:0;transform:translateY(14px);transition:1s ease}
+body.ready main{opacity:1;transform:none}
+.shell{width:min(100% - 24px,900px);margin:0 auto;padding:72px 0 100px}
+.paper{
+  background:var(--paper);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.34);
+}
+.hero{
+  padding:58px 24px 44px;
+  text-align:center;
+  background:
+    linear-gradient(180deg,#fffdfb,#faf7ff);
+  border-bottom:1px solid var(--line);
+}
+.kicker{
+  font-size:12px;letter-spacing:.22em;color:#81758a;
+  text-transform:uppercase;margin-bottom:16px;
+}
+.hero h2{font-size:28px;margin:0 0 10px}
+.hero .sub{color:#918795;font-size:14px}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:28px;
+}
+.stat{
+  padding:28px 22px;
+  border-radius:18px;
+  border:1px solid #e9e3f2;
+  background:linear-gradient(180deg,#fff,#fbf9ff);
+  text-align:center;
+}
+.stat-label{
+  color:#8d8290;font-size:12px;
+  letter-spacing:.08em;margin-bottom:10px;
+}
+.stat-value{
+  font-size:32px;
+  font-weight:900;
+  line-height:1.15;
+  color:#241f2a;
+}
+.stat-value.em{
+  color:var(--violet2);
+  text-shadow:0 0 24px rgba(111,94,234,.13);
+}
+.stat-note{margin-top:8px;font-size:11px;color:#a199a5}
+
+.letter{
+  width:min(100%,650px);
+  margin:0 auto;
+  padding:12px 28px 24px;
+  text-align:center;
+  line-height:2.05;
+  font-size:15px;
+  word-break:keep-all;
+}
+.letter p{margin:0 0 22px}
+.big-quote{
+  margin:34px auto;
+  padding:20px 18px;
+  border-top:1px solid #e3dff0;
+  border-bottom:1px solid #e3dff0;
+  font-size:19px;
+  font-weight:900;
+  color:#5c50c9;
+}
+.report{
+  margin:34px 0;
+  padding:24px;
+  border-radius:18px;
+  text-align:left;
+  background:#15121b;
+  color:#f7f3fb;
+  box-shadow:0 16px 40px rgba(33,26,45,.18);
+}
+.report h3{margin:0 0 16px;font-size:16px;text-align:center}
+.row{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);
+  font-size:13px;
+}
+.row:last-child{border-bottom:0}
+.row span:first-child{color:#bdb3c7}
+.row strong{color:#fff}
+.punch{
+  margin:30px 0;
+  padding:22px 18px;
+  border-radius:16px;
+  background:#fff5fa;
+  border:1px solid #f3d7e5;
+  font-weight:800;
+  color:#7a3258;
+}
+.end{
+  padding:42px 24px 48px;
+  text-align:center;
+  border-top:1px solid var(--line);
+  background:linear-gradient(180deg,#fffdfb,#faf7ff);
+}
+.end .heart{font-size:24px;color:var(--violet2)}
+.fade{opacity:0;transform:translateY(24px);transition:.75s ease}
+.fade.in{opacity:1;transform:none}
+
+@media(max-width:700px){
+  .shell{width:min(100% - 12px,900px);padding:16px 0 36px}
+  .paper{border-radius:16px}
+  .hero{padding:42px 18px 32px}
+  .stats{grid-template-columns:1fr;padding:18px}
+  .stat-value{font-size:28px}
+  .letter{padding:8px 18px 18px;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<section class="gate" id="gate">
+  <div class="gate-inner">
+    <div class="ghost">👻</div>
+    <h1>라브님께 도착한 2주년 편지</h1>
+    <p>처음엔 정말 평범한 축하 편지였습니다.</p>
+    <button class="open-btn" id="openBtn">편지 열기</button>
+  </div>
+</section>
+
+<main>
+  <div class="shell">
+    <article class="paper">
+      <section class="hero fade">
+        <div class="kicker">2nd Anniversary</div>
+        <h2>라브에게</h2>
+        <div class="sub">2024.09.09 — 2026.09.09</div>
+      </section>
+
+      <section class="stats">
+        <div class="stat fade">
+          <div class="stat-label">FIRST BROADCAST</div>
+          <div class="stat-value em">2024.09.09</div>
+          <div class="stat-note">첫 방송</div>
+        </div>
+        <div class="stat fade">
+          <div class="stat-label">TOTAL BROADCAST TIME</div>
+          <div class="stat-value em">1,372시간</div>
+          <div class="stat-note">지난 2년 동안 실제 방송한 시간</div>
+        </div>
+      </section>
+
+      <section class="letter">
+        <p class="fade">
+          어느덧 라브님이 첫 방송을 켠 지도 2년이 됐습니다.<br>
+          처음에는 하루 9시간 넘게 방송하던 날도 있었고,<br>
+          켜졌다 하면 정말 오래 켜져 있던 시절도 있었죠.
+        </p>
+
+        <div class="big-quote fade">“그럼 지난 2년 동안 방송은 얼마나 했을까?”</div>
+
+        <p class="fade">
+          그래서 계산해 봤습니다.<br>
+          이것저것 빼고 남은 실제 방송 시간은,
+        </p>
+
+        <div class="stat fade" style="margin:18px 0 34px">
+          <div class="stat-label">ACTUAL STREAMING TIME</div>
+          <div class="stat-value em" style="font-size:42px">1,372시간</div>
+        </div>
+
+        <p class="fade">
+          와.<br>
+          많긴 많네요.
+        </p>
+
+        <p class="fade">
+          ...근데 그때의 라브는 어디 갔을까요?
+        </p>
+
+        <div class="report fade">
+          <h3>👻 라브 방송 생존 보고서</h3>
+          <div class="row"><span>초창기</span><strong>9시간? 아직 할 만한데?</strong></div>
+          <div class="row"><span>중간</span><strong>오늘은 조금 짧게 할게요</strong></div>
+          <div class="row"><span>현재</span><strong>이번 달 안에는... 켜겠지?</strong></div>
+          <div class="row"><span>싫어하는 것</span><strong>휴방</strong></div>
+          <div class="row"><span>특이사항</span><strong>본인이 함</strong></div>
+        </div>
+
+        <p class="fade">
+          일이 바빠지고 예전처럼 오래 방송하기 어려워졌다는 것도 알고 있습니다.<br>
+          그러니까 다시 매일 9시간씩 방송하라는 이야기는 아니고요.
+        </p>
+
+        <div class="punch fade">
+          일단 켜기라도 해주세요.
+        </div>
+
+        <p class="fade">
+          그래도 그 1,372시간 안에서 웃었던 순간도,<br>
+          기다렸던 순간도, 기억에 남는 방송도 참 많았습니다.<br>
+          그래서 이렇게 놀릴 수 있는 것도 결국 기다리고 있기 때문이겠죠.
+        </p>
+
+        <p class="fade">
+          2주년 진심으로 축하드립니다.<br>
+          바빠도 건강 잘 챙기고,<br>
+          앞으로도 오래 보고 싶어요.
+        </p>
+      </section>
+
+      <section class="end fade">
+        <div class="heart">♥</div>
+        <strong>2nd Anniversary, RABU</strong><br><br>
+        From. 하늘길
+      </section>
+    </article>
+  </div>
+</main>
+
+<script>
+const gate=document.getElementById('gate');
+document.getElementById('openBtn').addEventListener('click',()=>{
+  gate.classList.add('open');
+  document.body.classList.add('ready');
+});
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
