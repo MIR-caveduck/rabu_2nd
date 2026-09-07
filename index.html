@@ -229,6 +229,43 @@ body.ready main{opacity:1;transform:none}
   .warning-row{font-size:13px}
 }
 
+
+.act3{
+  position:fixed;inset:0;z-index:90;display:none;
+  overflow:auto;padding:40px 18px;
+  background:
+    radial-gradient(circle at 20% 15%,rgba(255,182,218,.42),transparent 28%),
+    radial-gradient(circle at 82% 12%,rgba(190,177,255,.40),transparent 28%),
+    linear-gradient(160deg,#fff8fc,#f7f2ff 55%,#fffdfd);
+}
+.act3.show{display:grid;place-items:center;animation:act3In .9s ease both}
+@keyframes act3In{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:blur(0)}}
+.act3-card{
+  width:min(100%,720px);padding:54px 34px;text-align:center;
+  color:#463c4b;background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.9);border-radius:28px;
+  box-shadow:0 24px 80px rgba(111,94,150,.16);
+  backdrop-filter:blur(12px);
+}
+.sparkles{font-size:22px;color:#d98ab5;margin-bottom:16px}
+.act3-kicker{font-size:11px;letter-spacing:.22em;color:#a991b0;margin-bottom:10px}
+.act3 h2{font-size:30px;margin:0 0 30px;color:#51405b}
+.act3 p{font-size:15px;line-height:2.05;margin:0 0 22px;word-break:keep-all}
+.act3-highlight{
+  margin:34px 0 18px;font-size:21px;font-weight:900;color:#9a64a5;
+}
+.signature{margin-top:26px;color:#8c7b91;font-size:13px}
+.restart-btn{
+  margin-top:32px;border:1px solid #dbcce2;background:#fff;color:#725f79;
+  padding:11px 17px;border-radius:999px;font-weight:700;cursor:pointer;
+}
+@media(max-width:700px){
+  .act3{padding:18px 10px}
+  .act3-card{padding:40px 20px;border-radius:20px}
+  .act3 h2{font-size:26px}
+  .act3 p{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -237,12 +274,12 @@ body.ready main{opacity:1;transform:none}
   <div class="gate-inner">
     <div class="ghost">👻</div>
     <h1>라브님께 도착한 2주년 편지</h1>
-    <p>처음엔 정말 평범한 축하 편지였습니다.</p>
+    <p>2024.09.09 — 2026.09.09</p>
     <button class="open-btn" id="openBtn">편지 열기</button>
   </div>
 </section>
 
-<main>
+<main id="act1">
   <div class="shell">
     <article class="paper">
       <section class="hero fade">
@@ -255,99 +292,109 @@ body.ready main{opacity:1;transform:none}
         <div class="stat fade">
           <div class="stat-label">FIRST BROADCAST</div>
           <div class="stat-value em">2024.09.09</div>
-          <div class="stat-note">첫 방송</div>
+          <div class="stat-note">모든 이야기의 시작</div>
         </div>
         <div class="stat fade">
-          <div class="stat-label">TOTAL BROADCAST TIME</div>
-          <div class="stat-value em">1,372시간</div>
-          <div class="stat-note">지난 2년 동안 실제 방송한 시간</div>
+          <div class="stat-label">TOGETHER</div>
+          <div class="stat-value em">2 YEARS</div>
+          <div class="stat-note">어느덧 두 번째 기념일</div>
         </div>
       </section>
 
       <section class="letter">
         <p class="fade">
-          어느덧 라브님이 첫 방송을 켠 지도 2년이 됐습니다.<br>
-          처음에는 하루 9시간 넘게 방송하던 날도 있었고,<br>
-          켜졌다 하면 정말 오래 켜져 있던 시절도 있었죠.
-        </p>
-
-        <div class="big-quote fade">“그럼 지난 2년 동안 방송은 얼마나 했을까?”</div>
-
-        <p class="fade">
-          그래서 계산해 봤습니다.<br>
-          이것저것 빼고 남은 실제 방송 시간은,
-        </p>
-
-        <div class="stat fade" style="margin:18px 0 34px">
-          <div class="stat-label">ACTUAL STREAMING TIME</div>
-          <div class="stat-value em" style="font-size:42px">1,372시간</div>
-        </div>
-
-        <p class="fade">
-          와.<br>
-          많긴 많네요.
+          처음 라브님을 알게 되었을 때가 아직도 생각납니다.<br>
+          유령이라는 독특한 모습도, 방송에서 보여주던 분위기도,<br>
+          그리고 라브님만의 말투와 장난도 하나둘 익숙해졌습니다.
         </p>
 
         <p class="fade">
-          ...근데 그때의 라브는 어디 갔을까요?
+          그렇게 방송을 찾아가고, 웃고, 기다리고,<br>
+          어느새 첫 방송으로부터 2년이라는 시간이 흘렀네요.
         </p>
 
-        <div class="report fade">
-          <h3>👻 라브 방송 생존 보고서</h3>
-          <div class="row"><span>초창기</span><strong>9시간? 아직 할 만한데?</strong></div>
-          <div class="row"><span>중간</span><strong>오늘은 조금 짧게 할게요</strong></div>
-          <div class="row"><span>현재</span><strong>이번 달 안에는... 켜겠지?</strong></div>
-          <div class="row"><span>싫어하는 것</span><strong>휴방</strong></div>
-          <div class="row"><span>특이사항</span><strong>본인이 함</strong></div>
-        </div>
+        <div class="big-quote fade">2024년 9월 9일, 그날부터 시작된 이야기.</div>
 
         <p class="fade">
-          일이 바빠지고 예전처럼 오래 방송하기 어려워졌다는 것도 알고 있습니다.<br>
-          그러니까 다시 매일 9시간씩 방송하라는 이야기는 아니고요.
-        </p>
-
-        <div class="punch fade">
-          일단 켜기라도 해주세요.
-        </div>
-
-        <p class="fade">
-          그래도 그 1,372시간 안에서 웃었던 순간도,<br>
-          기다렸던 순간도, 기억에 남는 방송도 참 많았습니다.<br>
-          그래서 이렇게 놀릴 수 있는 것도 결국 기다리고 있기 때문이겠죠.
+          그동안 정말 많은 순간들이 있었고<br>
+          라브님이라는 사람을 조금씩 더 알아갈 수 있었습니다.
         </p>
 
         <p class="fade">
-          2주년 진심으로 축하드립니다.<br>
-          바빠도 건강 잘 챙기고,<br>
-          앞으로도 오래 보고 싶어요.
+          그래서 2주년을 맞아,<br>
+          지난 시간을 한번 천천히 돌아봤습니다.
         </p>
       </section>
 
       <section class="transition-zone fade" id="transitionZone">
-        <div class="small">여기까지 읽으셨다면...</div>
-        <h3>하지만 진짜 문제는 따로 있습니다.</h3>
-        <p>
-          지난 2년의 기록을 모두 확인한 뒤,<br>
-          마지막으로 현재의 라브를 확인해 주세요.
-        </p>
-        <button class="switch-btn" id="switchBtn">라브의 현재 상태 확인하기</button>
-      </section>
-
-      <section class="end fade">
-        <div class="heart">♥</div>
-        <strong>2nd Anniversary, RABU</strong><br><br>
-        From. 하늘길
+        <div class="small">2주년 기록 확인 중...</div>
+        <h3>그런데 확인해야 할 기록이 하나 있습니다.</h3>
+        <p>라브님의 지난 2년을 숫자로 확인해 보았습니다.</p>
+        <button class="switch-btn" id="switchBtn">현재 상태 확인하기</button>
       </section>
     </article>
   </div>
 </main>
 
+<section class="act2-overlay" id="act2Overlay" aria-hidden="true">
+  <div class="act2-wrap">
+    <div class="act2-kicker">⚠ CURRENT STATUS REPORT ⚠</div>
+    <h2 class="act2-title">라브 방송 관측 보고서</h2>
+    <div class="act2-sub">2주년 특별 조사 결과</div>
+
+    <div class="warning-card">
+      <div class="warning-row"><span>첫 방송</span><strong>2024.09.09</strong></div>
+      <div class="warning-row"><span>누적 방송시간</span><strong class="hot">1,372시간</strong></div>
+      <div class="warning-row"><span>초창기</span><strong>9시간 이상 방송</strong></div>
+      <div class="warning-row"><span>현재</span><strong class="hot">한 달에 1번 킬까 말까</strong></div>
+      <div class="warning-row"><span>싫어하는 것</span><strong>휴방</strong></div>
+      <div class="warning-row"><span>특이사항</span><strong class="hot">본인이 함</strong></div>
+    </div>
+
+    <div class="act2-punch">방송을 발견하셨다면 행운입니다.</div>
+    <div class="act2-note">
+      초창기의 그 장시간 방송은 어디로 갔을까요?<br>
+      2주년을 맞아 관계 기관에서 계속 추적 중입니다.
+    </div>
+
+    <button class="close-act2" id="toAct3">그래도, 마지막으로 할 말이 있어요</button>
+  </div>
+</section>
+
+<section class="act3" id="act3" aria-hidden="true">
+  <div class="act3-card">
+    <div class="sparkles">✦　♡　✦</div>
+    <div class="act3-kicker">THE REAL LETTER</div>
+    <h2>그래도 라브에게</h2>
+    <p>
+      실컷 놀렸지만, 결국 이렇게 하나하나 기억하고 있는 건<br>
+      라브님의 방송에서 받은 즐거운 기억들이 그만큼 많기 때문이겠죠.
+    </p>
+    <p>
+      바빠진 지금은 예전처럼 자주 보기 어렵더라도,<br>
+      무리하지 말고 건강하게 오래 방송해 주셨으면 좋겠습니다.
+    </p>
+    <p>
+      기다리는 시간까지 나중에는 추억이 될 수 있도록,<br>
+      앞으로도 라브님다운 모습 오래 보여주세요.
+    </p>
+    <div class="act3-highlight">2주년, 진심으로 축하해요. 👻♡</div>
+    <div class="signature">From. 하늘길</div>
+    <button class="restart-btn" id="restartBtn">처음부터 다시 보기</button>
+  </div>
+</section>
+
 <script>
+history.scrollRestoration = 'manual';
+window.addEventListener('beforeunload',()=>window.scrollTo(0,0));
+window.addEventListener('load',()=>setTimeout(()=>window.scrollTo(0,0),0));
+
 const gate=document.getElementById('gate');
 document.getElementById('openBtn').addEventListener('click',()=>{
   gate.classList.add('open');
   document.body.classList.add('ready');
 });
+
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
 },{threshold:.12});
@@ -355,52 +402,37 @@ document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 
 const transitionZone=document.getElementById('transitionZone');
 const switchBtn=document.getElementById('switchBtn');
-const act2Overlay=document.getElementById('act2Overlay');
-const closeAct2=document.getElementById('closeAct2');
+const act2=document.getElementById('act2Overlay');
+const act3=document.getElementById('act3');
 
-const bottomObserver=new IntersectionObserver(entries=>{
+new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      setTimeout(()=>switchBtn.classList.add('show'),450);
-    }
+    if(e.isIntersecting) setTimeout(()=>switchBtn.classList.add('show'),350);
   });
-},{threshold:.65});
-bottomObserver.observe(transitionZone);
+},{threshold:.6}).observe(transitionZone);
 
 switchBtn.addEventListener('click',()=>{
-  act2Overlay.classList.add('show');
-  act2Overlay.setAttribute('aria-hidden','false');
+  act2.classList.add('show');
+  act2.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
 });
 
-closeAct2.addEventListener('click',()=>{
-  act2Overlay.classList.remove('show');
-  act2Overlay.setAttribute('aria-hidden','true');
+document.getElementById('toAct3').addEventListener('click',()=>{
+  act2.classList.remove('show');
+  act2.setAttribute('aria-hidden','true');
+  act3.classList.add('show');
+  act3.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+});
+
+document.getElementById('restartBtn').addEventListener('click',()=>{
+  act3.classList.remove('show');
+  act3.setAttribute('aria-hidden','true');
+  gate.classList.remove('open');
+  document.body.classList.remove('ready');
   document.body.style.overflow='';
+  window.scrollTo({top:0,behavior:'instant'});
 });
 </script>
-
-<div class="act2-overlay" id="act2Overlay" aria-hidden="true">
-  <div class="act2-wrap">
-    <div class="act2-kicker">CURRENT STATUS REPORT</div>
-    <h2 class="act2-title">라브 방송 관측 보고서</h2>
-    <div class="act2-sub">2주년 특별판 · 현재 상태</div>
-    <div class="warning-card">
-      <div class="warning-row"><span>첫 방송</span><strong>2024.09.09</strong></div>
-      <div class="warning-row"><span>누적 방송시간</span><strong>1,372시간</strong></div>
-      <div class="warning-row"><span>초창기</span><strong>9시간 이상 방송</strong></div>
-      <div class="warning-row"><span>현재</span><strong class="hot">한 달에 1번 킬까 말까</strong></div>
-      <div class="warning-row"><span>싫어하는 것</span><strong>휴방</strong></div>
-      <div class="warning-row"><span>특이사항</span><strong class="hot">본인이 함</strong></div>
-    </div>
-    <div class="act2-punch">방송을 발견하셨다면 행운입니다.</div>
-    <div class="act2-note">
-      예전처럼 9시간씩 켜달라는 뜻은 아닙니다.<br>
-      일단... 켜기라도 해주세요.
-    </div>
-    <button class="close-act2" id="closeAct2">편지로 돌아가기</button>
-  </div>
-</div>
-
 </body>
 </html>
