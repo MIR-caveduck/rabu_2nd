@@ -302,6 +302,36 @@ body.ready main{opacity:1;transform:none}
 .act2-wrap{margin:auto;width:min(100%,760px);padding-bottom:32px}
 @media(max-width:700px){.photo-duo{grid-template-columns:1fr}.photo-duo img{height:auto;max-height:500px;object-fit:contain}.outfit-grid{grid-template-columns:1fr 1fr}.outfit-grid figure:last-child{grid-column:1/-1}.outfit-grid img{height:220px}.evolution-row img{height:190px}.act2-overlay{padding-left:14px;padding-right:14px;padding-bottom:max(90px,calc(46px + env(safe-area-inset-bottom)))}}
 
+
+.bgm-player{
+  position:fixed;right:18px;bottom:18px;z-index:120;
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:999px;
+  background:rgba(24,19,31,.82);color:#fff;
+  box-shadow:0 8px 28px rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+  font-size:11px;opacity:0;pointer-events:none;
+  transform:translateY(8px);transition:.35s ease;
+}
+body.ready .bgm-player{opacity:1;pointer-events:auto;transform:none}
+.bgm-player button{
+  width:30px;height:30px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:13px;
+}
+.bgm-info{min-width:110px;line-height:1.25}
+.bgm-act{font-size:9px;letter-spacing:.12em;opacity:.58}
+.bgm-title{font-weight:700;white-space:nowrap}
+.bgm-player input[type=range]{width:72px;accent-color:#c5a6db}
+.act2-overlay.show ~ .act3 + .bgm-player{background:rgba(30,5,9,.88)}
+@media(max-width:600px){
+  .bgm-player{right:10px;bottom:10px;padding:7px 9px}
+  .bgm-info{min-width:88px}
+  .bgm-player input[type=range]{width:52px}
+}
+
+
+.act2-wrap{padding-bottom:max(110px,calc(env(safe-area-inset-bottom) + 110px))!important}
+.act2-overlay{overscroll-behavior:contain}
 </style>
 </head>
 <body>
@@ -538,7 +568,81 @@ body.ready main{opacity:1;transform:none}
   </div>
 </section>
 
+
+<div class="bgm-player" id="bgmPlayer">
+  <button id="bgmToggle" aria-label="BGM 재생/일시정지">Ⅱ</button>
+  <div class="bgm-info">
+    <div class="bgm-act" id="bgmAct">ACT I</div>
+    <div class="bgm-title" id="bgmTitle">1막 BGM</div>
+  </div>
+  <span>🔊</span>
+  <input id="bgmVolume" type="range" min="0" max="1" step="0.01" value="0.32" aria-label="BGM 음량">
+</div>
+<audio id="bgm" preload="auto" loop>
+  <source src="audio/rabu-act1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+
+const bgm=document.getElementById('bgm');
+const bgmToggle=document.getElementById('bgmToggle');
+const bgmVolume=document.getElementById('bgmVolume');
+const bgmAct=document.getElementById('bgmAct');
+const bgmTitle=document.getElementById('bgmTitle');
+
+const bgmTracks={
+  1:{src:'audio/rabu-act1.mp3',act:'ACT I',title:'1막 BGM'},
+  2:{src:'audio/rabu-act2.mp3',act:'ACT II',title:'Operation Biscuit'},
+  3:{src:'audio/rabu-act3.mp3',act:'ACT III',title:'Emotional Sentimental Piano'}
+};
+let currentAct=1;
+bgm.volume=.32;
+
+function updateBgmButton(){bgmToggle.textContent=bgm.paused?'▶':'Ⅱ'}
+
+async function playBgm(){
+  try{await bgm.play()}catch(e){}
+  updateBgmButton();
+}
+
+function switchBgm(act,fade=true){
+  if(currentAct===act && bgm.currentTime>0){playBgm();return}
+  currentAct=act;
+  const t=bgmTracks[act];
+  bgmAct.textContent=t.act;
+  bgmTitle.textContent=t.title;
+
+  const target=Number(bgmVolume.value);
+  if(!fade){
+    bgm.src=t.src; bgm.load(); bgm.volume=target; playBgm(); return;
+  }
+
+  const start=bgm.volume;
+  const steps=10;
+  let i=0;
+  const out=setInterval(()=>{
+    i++;
+    bgm.volume=Math.max(0,start*(1-i/steps));
+    if(i>=steps){
+      clearInterval(out);
+      bgm.pause();
+      bgm.src=t.src; bgm.load(); bgm.volume=0;
+      playBgm();
+      let j=0;
+      const inn=setInterval(()=>{
+        j++;
+        bgm.volume=Math.min(target,target*j/steps);
+        if(j>=steps)clearInterval(inn);
+      },35);
+    }
+  },25);
+}
+
+bgmToggle.addEventListener('click',()=>{
+  if(bgm.paused)playBgm(); else {bgm.pause();updateBgmButton()}
+});
+bgmVolume.addEventListener('input',()=>{bgm.volume=Number(bgmVolume.value)});
+
 history.scrollRestoration='manual';
 function forceTop(){window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0}
 window.addEventListener('pageshow',()=>setTimeout(forceTop,0));
@@ -546,7 +650,7 @@ window.addEventListener('load',()=>setTimeout(forceTop,0));
 window.addEventListener('beforeunload',forceTop);
 
 const gate=document.getElementById('gate');
-document.getElementById('openBtn').addEventListener('click',()=>{gate.classList.add('open');document.body.classList.add('ready')});
+document.getElementById('openBtn').addEventListener('click',()=>{gate.classList.add('open');document.body.classList.add('ready');switchBgm(1,false)});
 
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
@@ -558,9 +662,9 @@ const act3=document.getElementById('act3');
 
 new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>switchBtn.classList.add('show'),350)})},{threshold:.55}).observe(transitionZone);
 
-switchBtn.addEventListener('click',()=>{act2.classList.add('show');act2.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'});
-document.getElementById('toAct3').addEventListener('click',()=>{act2.classList.remove('show');act2.setAttribute('aria-hidden','true');act3.classList.add('show');act3.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'});
-document.getElementById('restartBtn').addEventListener('click',()=>{act3.classList.remove('show');act3.setAttribute('aria-hidden','true');gate.classList.remove('open');document.body.classList.remove('ready');document.body.style.overflow='';forceTop()});
+switchBtn.addEventListener('click',()=>{act2.classList.add('show');act2.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';switchBgm(2,true)});
+document.getElementById('toAct3').addEventListener('click',()=>{act2.classList.remove('show');act2.setAttribute('aria-hidden','true');act3.classList.add('show');act3.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';switchBgm(3,true)});
+document.getElementById('restartBtn').addEventListener('click',()=>{act3.classList.remove('show');act3.setAttribute('aria-hidden','true');gate.classList.remove('open');document.body.classList.remove('ready');document.body.style.overflow='';bgm.pause();bgm.currentTime=0;currentAct=1;bgmAct.textContent='ACT I';bgmTitle.textContent='1막 BGM';updateBgmButton();forceTop()});
 </script>
 </body>
 </html>
