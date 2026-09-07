@@ -279,6 +279,29 @@ body.ready main{opacity:1;transform:none}
 .final-date{margin-top:34px;font-size:12px;letter-spacing:.12em;color:#a492ac}
 @media(max-width:700px){.chapter h3{font-size:18px}.memory-card{padding:18px 16px}}
 
+
+.story-photo{margin:30px auto 34px;max-width:720px;text-align:center}
+.story-photo img{display:block;width:100%;max-height:620px;object-fit:contain;border-radius:18px;box-shadow:0 14px 38px rgba(43,34,51,.13);background:#eee}
+.story-photo figcaption{margin-top:11px;font-size:12px;line-height:1.7;color:#8a7e8f}
+.photo-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0 34px}
+.photo-duo figure,.outfit-grid figure{margin:0;text-align:center}
+.photo-duo img{width:100%;height:310px;object-fit:cover;border-radius:16px;box-shadow:0 12px 30px rgba(43,34,51,.12)}
+.photo-duo figcaption,.outfit-grid figcaption{font-size:11px;color:#8a7e8f;margin-top:8px;line-height:1.55}
+.mini-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:24px 0 30px}
+.mini-tag{padding:8px 12px;border-radius:999px;background:#f5f0fb;border:1px solid #e6dcf1;color:#665a70;font-size:12px;font-weight:700}
+.feature-card{margin:34px 0;padding:20px;border-radius:20px;background:linear-gradient(135deg,#fff7fb,#f7f2ff);border:1px solid #eadfed;text-align:center}
+.feature-card h4{margin:0 0 8px;font-size:17px;color:#4c4051}.feature-card p{margin:0;color:#776b7d;line-height:1.8;font-size:13px}
+.outfit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0 34px}
+.outfit-grid img{width:100%;height:230px;object-fit:cover;object-position:top;border-radius:15px;background:#354650}
+.evolution{margin:36px 0;padding:24px 18px;border-radius:20px;background:#faf8fc;border:1px solid #ebe5ef;text-align:center}
+.evolution-title{font-weight:900;color:#4a4050;margin-bottom:17px}.evolution-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.evolution-row img{width:100%;height:250px;object-fit:cover;border-radius:14px}.evolution-arrow{font-size:25px;color:#a68ab3}
+.evolution-label{margin-top:9px;font-size:11px;color:#897d8e}.evolution-joke{margin-top:18px;font-size:12px;line-height:1.9;color:#6d6272}.evolution-joke strong{color:#b04d72}
+.current-shot img{max-height:690px}.current-shot figcaption{font-size:13px;color:#6e6273}
+.act2-overlay{overflow-y:auto;align-items:flex-start;padding:clamp(20px,4vh,42px) 24px max(72px,calc(32px + env(safe-area-inset-bottom)))}
+.act2-wrap{margin:auto;width:min(100%,760px);padding-bottom:32px}
+@media(max-width:700px){.photo-duo{grid-template-columns:1fr}.photo-duo img{height:auto;max-height:500px;object-fit:contain}.outfit-grid{grid-template-columns:1fr 1fr}.outfit-grid figure:last-child{grid-column:1/-1}.outfit-grid img{height:220px}.evolution-row img{height:190px}.act2-overlay{padding-left:14px;padding-right:14px;padding-bottom:max(90px,calc(46px + env(safe-area-inset-bottom)))}}
+
 </style>
 </head>
 <body>
@@ -336,6 +359,10 @@ body.ready main{opacity:1;transform:none}
         로블록스를 유난히 좋아하는 모습까지 합쳐지니까<br>
         처음엔 정말 <strong>비품창고에서 주워온 잼민이 유령</strong> 같은 느낌이 강했어요.
       </p>
+      <div class="photo-duo fade">
+        <figure><img src="images/early-01.png" alt="방송 초기 라브"><figcaption>👻 처음 봤을 때의 라브. 뭔가... 생각보다 귀여웠다.</figcaption></figure>
+        <figure><img src="images/early-02.png" alt="비품창고의 초기 라브"><figcaption>📦 비품창고 + 작은 목소리 + 아직은 어색한 방송.</figcaption></figure>
+      </div>
 
       <div class="chapter fade"><div class="chapter-num">2024.09 — 2024.10</div><h3>그런데, 이것저것 다 해보기 시작했습니다.</h3></div>
       <p class="fade">
@@ -347,6 +374,7 @@ body.ready main{opacity:1;transform:none}
         손컨은 영 좋지 않아서 게임을 잘하진 못했지만,<br>
         이상하게도 못하는데 계속 뭔가 해보려는 모습이 재밌었습니다.
       </p>
+      <div class="mini-tags fade"><span class="mini-tag">🎮 첫 게임들</span><span class="mini-tag">🎤 노래뱅</span><span class="mini-tag">👥 합방</span><span class="mini-tag">🏆 게임 대회</span><span class="mini-tag">👻 재활센터</span></div>
       <div class="memory-card fade">
         <div class="memory-title">기억에 남는 장면</div>
         <div class="memory-text">
@@ -359,6 +387,8 @@ body.ready main{opacity:1;transform:none}
         <strong>"어떻게 이렇게 특이한 사람이 있을 수 있지?"</strong><br>
         그래서 그때부터는 방송을 켜면 자연스럽게 보게 됐던 것 같아요.
       </p>
+      <div class="feature-card fade"><h4>🎃 그리고 찾아온 할로윈 신의상</h4><p>방송도 조금씩 익숙해지고, 라브에게도 하나둘 새로운 모습이 생겼습니다.<br>그리고 무엇보다 본인은 <strong>소매를 굉장히 마음에 들어 했습니다.</strong></p></div>
+      <div class="photo-duo fade"><figure><img src="images/halloween-01.png" alt="라브 할로윈 신의상"><figcaption>🎃 할로윈 신의상 공개</figcaption></figure><figure><img src="images/halloween-sleeve.png" alt="할로윈 신의상 소매를 보여주는 라브"><figcaption>✨ 그리고 카메라 앞으로 찾아온 자랑의 소매.</figcaption></figure></div>
 
       <div class="chapter fade"><div class="chapter-num">2024.10.06 — 2025.01</div><h3>어색한데, 꾸준했고, 점점 사람이 모였습니다.</h3></div>
       <p class="fade">
@@ -375,6 +405,8 @@ body.ready main{opacity:1;transform:none}
         지금 생각하면 그 시절의 라브는<br>
         "방송을 잘하는 사람"이라기보다는 <strong>일단 뭐든 해보는 사람</strong>에 가까웠던 것 같습니다.
       </p>
+      <div class="feature-card fade"><h4>🖤 유령도 옷장이 생겼습니다.</h4><p>처음의 흰 티 한 장에서 시작해서, 방송을 계속할수록 이런저런 의상과 모습도 늘어났습니다.</p></div>
+      <div class="outfit-grid fade"><figure><img src="images/outfit-gothic.png" alt="고딕풍 라브"><figcaption>고딕풍 라브</figcaption></figure><figure><img src="images/outfit-staff.png" alt="패러블 직원풍 라브"><figcaption>패러블 직원(?) 라브</figcaption></figure><figure><img src="images/outfit-office.png" alt="직장인풍 라브"><figcaption>점점 직장인의 기운이...</figcaption></figure></div>
 
       <div class="chapter fade"><div class="chapter-num">2025.02 — 2025.05</div><h3>방송의 호흡이 바뀌기 시작했습니다.</h3></div>
       <p class="fade">
@@ -386,6 +418,8 @@ body.ready main{opacity:1;transform:none}
         그리고 5월쯤부터는 방송 사이의 간격이 눈에 띄게 벌어졌죠.<br>
         길면 보름, 짧으면 며칠. 매일 켜더라도 짧게 보고 사라지는 날이 늘었습니다.
       </p>
+
+      <div class="evolution fade"><div class="evolution-title">✨ 비품창고 관측 기록: 화질도, 캐릭터도 발전했습니다.</div><div class="evolution-row"><div><img src="images/early-01.png" alt="초기 라브"><div class="evolution-label">2024 · 흐릿한 창고의 유령</div></div><div class="evolution-arrow">→</div><div><img src="images/later-01.png" alt="선명해진 라브"><div class="evolution-label">이후 · 선명해진 창고의 유령</div></div></div><div class="evolution-joke">창고 화질: 선명해짐 · 라브: 선명해짐<br><strong>방송 일정: 점점 흐릿해짐</strong></div></div>
 
       <div class="chapter fade"><div class="chapter-num">1ST ANNIVERSARY — BABYBLUE ACADEMY</div><h3>그리고 라브의 방송이, 라브의 방송만은 아니게 됐습니다.</h3></div>
       <p class="fade">
@@ -410,6 +444,7 @@ body.ready main{opacity:1;transform:none}
         일이 바빠서 방송을 켤 시간이 없다는 걸 알고 있습니다.<br>
         그래서 여기까지는 그냥, 라브의 2년을 돌아본 이야기입니다.
       </p>
+      <figure class="story-photo current-shot fade"><img src="images/current.png" alt="현재의 라브"><figcaption>👻 처음과 같은 비품창고. 그런데 어느새 꽤 많은 것이 달라져 있었습니다.</figcaption></figure>
     </section>
 
     <section class="transition-zone fade" id="transitionZone">
