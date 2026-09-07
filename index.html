@@ -171,6 +171,64 @@ body.ready main{opacity:1;transform:none}
   .stat-value{font-size:28px}
   .letter{padding:8px 18px 18px;font-size:14px}
 }
+
+.transition-zone{
+  padding:52px 24px 64px;
+  text-align:center;
+  background:linear-gradient(180deg,#faf7ff,#f2eef9);
+  border-top:1px solid var(--line);
+}
+.transition-zone .small{font-size:12px;color:#8f8495;margin-bottom:10px}
+.transition-zone h3{margin:0 0 12px;font-size:24px}
+.transition-zone p{margin:0 auto 22px;max-width:560px;color:#6d6572;line-height:1.8}
+.switch-btn{
+  border:0;color:#fff;background:linear-gradient(135deg,#2d2340,#6f5eea);
+  padding:13px 22px;border-radius:999px;font-weight:800;cursor:pointer;
+  box-shadow:0 12px 28px rgba(77,60,130,.24);transition:.25s ease;
+  opacity:0;transform:translateY(10px) scale(.98);pointer-events:none;
+}
+.switch-btn.show{opacity:1;transform:none;pointer-events:auto}
+.switch-btn:hover{transform:translateY(-2px) scale(1.02)}
+.act2-overlay{
+  position:fixed;inset:0;z-index:80;background:#050507;color:#fff;
+  display:none;align-items:center;justify-content:center;padding:24px;
+}
+.act2-overlay.show{display:flex;animation:overlayIn .65s ease both}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+.act2-wrap{width:min(100%,760px);text-align:center}
+.act2-kicker{color:#ff6c87;font-size:11px;letter-spacing:.24em;margin-bottom:12px}
+.act2-title{font-size:34px;margin:0 0 10px}
+.act2-sub{color:#c9c3cc;margin-bottom:28px}
+.warning-card{
+  margin:0 auto 22px;max-width:620px;padding:22px;border-radius:18px;
+  background:linear-gradient(180deg,#16131a,#0f0d12);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 18px 44px rgba(0,0,0,.4);
+}
+.warning-row{
+  display:flex;justify-content:space-between;gap:14px;padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;
+}
+.warning-row:last-child{border-bottom:0}
+.warning-row span:first-child{color:#9d95a3}
+.warning-row strong{color:#fff}
+.warning-row strong.hot{color:#ff6c87}
+.act2-punch{
+  margin:26px auto 12px;font-size:28px;font-weight:900;color:#ff6c87;
+  text-shadow:0 0 22px rgba(255,108,135,.2);
+}
+.act2-note{color:#aaa2af;font-size:13px;line-height:1.8}
+.close-act2{
+  margin-top:24px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);color:#fff;padding:10px 16px;
+  border-radius:999px;cursor:pointer;
+}
+@media(max-width:700px){
+  .act2-title{font-size:28px}
+  .act2-punch{font-size:23px}
+  .warning-row{font-size:13px}
+}
+
 </style>
 </head>
 <body>
@@ -265,6 +323,16 @@ body.ready main{opacity:1;transform:none}
         </p>
       </section>
 
+      <section class="transition-zone fade" id="transitionZone">
+        <div class="small">여기까지 읽으셨다면...</div>
+        <h3>하지만 진짜 문제는 따로 있습니다.</h3>
+        <p>
+          지난 2년의 기록을 모두 확인한 뒤,<br>
+          마지막으로 현재의 라브를 확인해 주세요.
+        </p>
+        <button class="switch-btn" id="switchBtn">라브의 현재 상태 확인하기</button>
+      </section>
+
       <section class="end fade">
         <div class="heart">♥</div>
         <strong>2nd Anniversary, RABU</strong><br><br>
@@ -284,6 +352,55 @@ const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
 },{threshold:.12});
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+
+const transitionZone=document.getElementById('transitionZone');
+const switchBtn=document.getElementById('switchBtn');
+const act2Overlay=document.getElementById('act2Overlay');
+const closeAct2=document.getElementById('closeAct2');
+
+const bottomObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>switchBtn.classList.add('show'),450);
+    }
+  });
+},{threshold:.65});
+bottomObserver.observe(transitionZone);
+
+switchBtn.addEventListener('click',()=>{
+  act2Overlay.classList.add('show');
+  act2Overlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+});
+
+closeAct2.addEventListener('click',()=>{
+  act2Overlay.classList.remove('show');
+  act2Overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+});
 </script>
+
+<div class="act2-overlay" id="act2Overlay" aria-hidden="true">
+  <div class="act2-wrap">
+    <div class="act2-kicker">CURRENT STATUS REPORT</div>
+    <h2 class="act2-title">라브 방송 관측 보고서</h2>
+    <div class="act2-sub">2주년 특별판 · 현재 상태</div>
+    <div class="warning-card">
+      <div class="warning-row"><span>첫 방송</span><strong>2024.09.09</strong></div>
+      <div class="warning-row"><span>누적 방송시간</span><strong>1,372시간</strong></div>
+      <div class="warning-row"><span>초창기</span><strong>9시간 이상 방송</strong></div>
+      <div class="warning-row"><span>현재</span><strong class="hot">한 달에 1번 킬까 말까</strong></div>
+      <div class="warning-row"><span>싫어하는 것</span><strong>휴방</strong></div>
+      <div class="warning-row"><span>특이사항</span><strong class="hot">본인이 함</strong></div>
+    </div>
+    <div class="act2-punch">방송을 발견하셨다면 행운입니다.</div>
+    <div class="act2-note">
+      예전처럼 9시간씩 켜달라는 뜻은 아닙니다.<br>
+      일단... 켜기라도 해주세요.
+    </div>
+    <button class="close-act2" id="closeAct2">편지로 돌아가기</button>
+  </div>
+</div>
+
 </body>
 </html>
