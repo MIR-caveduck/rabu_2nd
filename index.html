@@ -1069,7 +1069,43 @@ new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTi
 
 switchBtn.addEventListener('click',()=>{act2.classList.add('show');act2.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';switchBgm(2,true)});
 document.getElementById('toAct3').addEventListener('click',()=>{act2.classList.remove('show');act2.setAttribute('aria-hidden','true');act3.classList.add('show');act3.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';switchBgm(3,true)});
-document.getElementById('restartBtn').addEventListener('click',()=>{act3.classList.remove('show');act3.setAttribute('aria-hidden','true');gate.classList.remove('open');document.body.classList.remove('ready');document.body.style.overflow='';bgm.pause();bgm.currentTime=0;currentAct=1;bgmAct.textContent='ACT I';bgmTitle.textContent='1막 BGM';updateBgmButton();forceTop()});
+document.getElementById('restartBtn').addEventListener('click',()=>{
+  // Close Act III
+  act3.classList.remove('show');
+  act3.setAttribute('aria-hidden','true');
+
+  // Reset Act II just in case
+  act2.classList.remove('show');
+  act2.setAttribute('aria-hidden','true');
+
+  // Reset old gate state (kept hidden visually)
+  gate.classList.remove('open');
+  document.body.classList.remove('ready');
+  document.body.style.overflow='';
+
+  // Reset BGM
+  bgm.pause();
+  bgm.currentTime=0;
+  currentAct=1;
+  bgmAct.textContent='ACT I';
+  bgmTitle.textContent='1막 BGM';
+  updateBgmButton();
+
+  // Restore and restart the cinematic prologue
+  if(prologueSequence){
+    prologueSequence.style.display='';
+    prologueSequence.classList.remove('prologue-exit');
+
+    prologueLanding.classList.remove('show');
+    document.getElementById('prologueProgress').style.opacity='';
+
+    clearTimeout(prologueTimer);
+    showPrologueFrame(0);
+    prologueTimer=setTimeout(advancePrologue,frameDuration);
+  }
+
+  forceTop();
+});
 </script>
 </body>
 </html>
